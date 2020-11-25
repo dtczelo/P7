@@ -2,6 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const usersRoutes = require("./routes/usersRoutes");
 const postsRoutes = require("./routes/postsRoutes");
+const path = require('path');
+const fs = require('fs');
 
 const app = express();
 
