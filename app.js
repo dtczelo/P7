@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const usersRoutes = require("./routes/usersRoutes");
 const postsRoutes = require("./routes/postsRoutes");
+const commentsRoutes = require("./routes/commentsRoutes");
 const path = require('path');
 const fs = require('fs');
 
@@ -14,11 +15,13 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
 app.use("/users", usersRoutes);
 app.use("/posts", postsRoutes);
+app.use("/comments", commentsRoutes);
 
 module.exports = app;
