@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 exports.signUp = (req, res) => {
+    console.log(req.body);
     bcrypt
         .hash(req.body.password, 10)
         .then((hash) => {

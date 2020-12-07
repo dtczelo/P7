@@ -4,7 +4,6 @@ const usersRoutes = require("./routes/usersRoutes");
 const postsRoutes = require("./routes/postsRoutes");
 const commentsRoutes = require("./routes/commentsRoutes");
 const path = require('path');
-const fs = require('fs');
 
 const app = express();
 
