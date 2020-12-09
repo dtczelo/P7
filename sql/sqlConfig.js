@@ -5,6 +5,7 @@ const mysql = require("mysql");
         user: "root",
         password: "",
         database: "P7",
+        multipleStatements: true
     });
     
     connectSql.connect(function (err) {
