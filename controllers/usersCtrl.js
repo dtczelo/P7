@@ -29,10 +29,10 @@ exports.login = (req, res) => {
                             res.status(200).json({
                                 userId: results[0].id,
                                 email: results[0].email,
-                                token: jwt.sign({ userId: results[0].id, admin: results[0].admin }, "RANDOM_TOKEN_SECRET", {
+                                token: jwt.sign({ userId: results[0].id, role: results[0].code }, "ed8ce15da9b7b5e2ee70634cc235e363", {
                                     expiresIn: "24h",
                                 }),
-                                admin: results[0].admin,
+                                role: results[0].code,
                                 verifyPassword: passOk
                             });
                         } else {
