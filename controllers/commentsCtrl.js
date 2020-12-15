@@ -3,8 +3,14 @@ const commentsRequests = require("../sql/commentsRequests");
 
 exports.createComment = (req, res) => {
     commentsRequests.createSql(req.body.user_id, req.body.post_id, req.body.message)
-    .then((results) => res.status(200).json({ message: "Commentaire ajouté !" }))
+    .then(() => res.status(200).json({ message: "Commentaire ajouté !" }))
     .catch((error) => res.status(400).json({ error }));
+};
+
+exports.deleteComment = (req, res) => {
+    commentsRequests.deleteSql(req.params.id)
+        .then(() => res.status(200).json({ message: "Commentaire supprimé !" }))
+        .catch((error) => res.status(400).json({ error }));
 };
 
 

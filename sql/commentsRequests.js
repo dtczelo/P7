@@ -9,6 +9,18 @@ exports.createSql = (user_id, post_id, message) => {
     });
 };
 
+exports.deleteSql = (comment_id) => {
+    return new Promise((resolve, reject) => {
+        sql.query(
+            `DELETE FROM comments WHERE id='${comment_id}'`,
+            function (error, results, fields) {
+                if (error) reject(error);
+                resolve(results);
+            }
+        );
+    });
+};
+
 exports.findAllSql = (post_id) => {
     return new Promise((resolve, reject) => {
         sql.query(

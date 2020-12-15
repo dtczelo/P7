@@ -3,6 +3,7 @@ const fs = require("fs");
 const postsRequests = require("../sql/postsRequests");
 
 exports.createPosts = (req, res) => {
+    console.log(req.headers.authorization);
     postsRequests.createSql(req.body.user_id, req.body.title, `${req.protocol}://${req.get('host')}/images/${req.file.filename}`)
         .then((results) => res.status(200).json({ message: "Post ajouté !" }))
         .catch((error) => res.status(400).json({ error }));

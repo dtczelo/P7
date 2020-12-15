@@ -11,7 +11,7 @@ exports.createSql = (user_id, title, imageUrl) => {
 
 exports.modifySql = (post_id, title, imageUrl) => {
     return new Promise((resolve, reject) => {
-        sql.query(`UPDATE posts SET title='${title}', image_url='${imageUrl}' WHERE id='${post_id}'`, function (error, results, fields) {
+        sql.query(`UPDATE posts SET title='${title}', date=date, image_url='${imageUrl}' WHERE id='${post_id}'`, function (error, results, fields) {
             if (error) reject(error);
             resolve(results);
         });

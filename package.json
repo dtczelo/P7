@@ -1,9 +1,10 @@
 {
   "name": "back-end",
   "version": "1.0.0",
-  "description": "",
+  "description": "Back-end P7 Openclassrooms",
   "main": "server.js",
   "scripts": {
+    "start": "node -r dotenv/config sql/sqlConfig.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -11,9 +12,13 @@
   "dependencies": {
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
+    "cross-env": "^7.0.3",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "helmet": "^4.2.0",
     "jsonwebtoken": "^8.5.1",
     "multer": "^1.4.2",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "password-policy": "0.0.3"
   }
 }

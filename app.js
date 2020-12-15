@@ -3,9 +3,12 @@ const bodyParser = require("body-parser");
 const usersRoutes = require("./routes/usersRoutes");
 const postsRoutes = require("./routes/postsRoutes");
 const commentsRoutes = require("./routes/commentsRoutes");
-const path = require('path');
+const path = require("path");
+const helmet = require("helmet");
 
 const app = express();
+
+app.use(helmet());
 
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
