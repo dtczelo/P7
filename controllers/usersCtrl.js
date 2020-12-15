@@ -4,15 +4,21 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 exports.signUp = (req, res) => {
-    bcrypt
-        .hash(req.body.password, 10)
-        .then((hash) => {
-            usersRequests
-                .signUpSql(req.body.lastname, req.body.firstname, req.body.email, hash)
-                .then((results) => res.status(201).json({ message: "Bienvenue ! Votre compte à été créé !" }))
-                .catch((error) => res.status(400).json({ error }));
-        })
-        .catch((error) => res.status(400).json({ error }));
+    if (/^\S+@\S+\.\S+$/.test(req.body.email)) {
+        bcrypt
+            .hash(req.body.password, 10)
+            .then((hash) => {
+                usersRequests
+                    .signUpSql(req.body.lastname, req.body.firstname, req.body.email, hash)
+                    .then((results) => res.status(201).json({ message: "Bienvenue ! Votre compte à été créé !" }))
+                    .catch((error) => res.status(400).json({ error }));
+            })
+            .catch((error) => res.status(400).json({ error }));
+    } else {
+        res.status(401).json({
+            alert: "Veuillez choisir un email valide !",
+        });
+    }
 };
 
 exports.login = (req, res) => {
@@ -20,7 +26,7 @@ exports.login = (req, res) => {
         .loginSql(req.body.email)
         .then((results) => {
             if (results.length === 0) {
-                res.status(404).json({ alert: "Email incorrect" });
+                res.status(404).json({ alert: "Email incorrect !" });
             } else {
                 bcrypt
                     .compare(req.body.password, results[0].password)
@@ -33,10 +39,10 @@ exports.login = (req, res) => {
                                     expiresIn: "24h",
                                 }),
                                 role: results[0].code,
-                                verifyPassword: passOk
+                                verifyPassword: passOk,
                             });
                         } else {
-                            res.status(400).json({ alert: "Mot de passe incorrect" });
+                            res.status(400).json({ alert: "Mot de passe incorrect !" });
                         }
                     })
                     .catch((error) => res.status(404).json({ error }));
@@ -46,7 +52,8 @@ exports.login = (req, res) => {
 };
 
 exports.deleteAccount = (req, res) => {
-    usersRequests.deleteSql(req.params.id)
+    usersRequests
+        .deleteSql(req.params.id)
         .then((results) => res.status(200).json({ message: "Utilisateur supprimé !" }))
         .catch((error) => res.status(400).json({ error }));
 };
