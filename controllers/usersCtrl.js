@@ -9,7 +9,7 @@ exports.signUp = (req, res) => {
         .then((hash) => {
             usersRequests
                 .signUpSql(req.body.lastname, req.body.firstname, req.body.email, hash)
-                .then((results) => res.status(201).json({ message: "Utilisateur ajouté !" }))
+                .then((results) => res.status(201).json({ message: "Bienvenue ! Votre compte à été créé !" }))
                 .catch((error) => res.status(400).json({ error }));
         })
         .catch((error) => res.status(400).json({ error }));

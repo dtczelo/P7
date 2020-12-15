@@ -10,7 +10,7 @@ module.exports = (req, res, next) => {
             next();
         } else {
             res.status(401).json({
-                message: "Le mot de passe doit contenir au moins une majuscule, un chiffre et un caractère spéciale !",
+                alert: "Le mot de passe doit contenir au moins une majuscule, un chiffre et un caractère spécial !",
             });
         }
     } catch {
